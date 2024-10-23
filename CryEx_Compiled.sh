@@ -57,45 +57,65 @@ do
         done
         wait
 
-        # AT THIS POINT WE ARE STILL IN SUB DIRECTORY
-        # DOING CRYEX LEN
-        touch ../output_files/CryEx_coord_len.bed
+        #############################
+        ####### CryEx_len.sh ########
+        #############################
 
+        # this part compiles the number of 5SS and 3SS sites identified for each expressed exon in a sample
+        
+        touch ../output_files/CryEx_coord_len.bed
+        
         for d in */
         do
             echo $d
             line=$d
+            # reads in the splicing/ junction information for both splice sites for every expressed exon
             SS3_file=`printf "../sub/${line}final_junc3SS_HTE_count.txt"`
             SS5_file=`printf "../sub/${line}final_junc5SS_HTE_count.txt"`
             chr=`echo $line|cut -d'-' -f 1`
+            
+            # count how many 3SS and 5SS junction sites
             SS3=`echo $(cat $SS3_file|wc -l)`
             echo $SS3
             SS5=`echo $(cat $SS5_file|wc -l)`
             echo $SS5
+
+            # the output file will contain the number of 3SS and 5SS sites each exon has
             printf "$line\t$chr\t$SS3\t$SS5\n" >> ../output_files/CryEx_coord_len.bed
-
         done 
-
-        # NOW DOING SJ JUNC
+        
+        ######################################################
+        ## Creating SJ_STAR.sh from template and running it ##
+        ######################################################
         cd ../scripts
         echo NOW DOING SJ JUNC
-
-        # the new bash file should be in scripts
+        
         sed "s/CHROME/${CHR}/g" /mnt/gtklab01/darren/CryEx_GSE227047/samples/misc_scripts/SJ_STAR_new.sh | sed "s/GSM_SAM/${SAMPLE}/g" > SJ_STAR_new_${SAMPLE}_${CHR}.sh
         bash SJ_STAR_new_${SAMPLE}_${CHR}.sh
 
+
+        ##########################################################
+        ## Creating SIMPLE_JUNC.sh from template and running it ##
+        ##########################################################
+        
         cd ../scripts
         echo NOW DOING SIMPLE JUNC
 
         sed "s/CHROME/${CHR}/g" /mnt/gtklab01/darren/CryEx_GSE227047/samples/misc_scripts/SIMPLE_JUNC_new.sh | sed "s/GSM_SAM/${SAMPLE}/g" > SIMPLE_JUNC_new_${SAMPLE}_${CHR}.sh
         bash SIMPLE_JUNC_new_${SAMPLE}_${CHR}.sh
 
+        ###################################################
+        ### Creating IR.sh from template and running it ###
+        ###################################################
 
         cd ../scripts
         # NOW DOINF IR
 
         sed "s/CHROME/${CHR}/g" /mnt/gtklab01/darren/CryEx_GSE227047/samples/misc_scripts/IR_new.sh | sed "s/GSM_SAM/${SAMPLE}/g" > IR_new_${SAMPLE}_${CHR}.sh
         bash IR_new_${SAMPLE}_${CHR}.sh
+
+
+
 
         echo -n "ENDED:     $SAMPLE $CHR  ">> /mnt/gtklab01/darren/CryEx_GSE227047/samples/progress_report/${SAMPLE}_progress.txt
         date >> /mnt/gtklab01/darren/CryEx_GSE227047/samples/progress_report/${SAMPLE}_progress.txt
