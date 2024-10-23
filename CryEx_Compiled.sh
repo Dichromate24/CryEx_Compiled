@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# This is a compiled pipeline that runs CryEx on all samples and all chromosomes automatically 
+# This is the compiled pipeline that runs CryEx on all samples and all chromosomes automatically 
+# Original code derived from https://github.com/CC-Cheng-Splicing-lab-BCM/hnRNPM_CryEx_dsRNA
+# Editing and automation completed by Darren Lim Yong Long
+# This was done as an undergraduate research project to validate SpliCeAT, another cryptic splicing detection application
 
 base_dir="/mnt/gtklab01/darren/CryEx_GSE227047/samples"
 
@@ -88,16 +91,13 @@ do
         ## Creating SJ_STAR.sh from template and running it ##
         ######################################################
         cd ../scripts
-        echo NOW DOING SJ JUNC
         
         sed "s/CHROME/${CHR}/g" /mnt/gtklab01/darren/CryEx_GSE227047/samples/misc_scripts/SJ_STAR_new.sh | sed "s/GSM_SAM/${SAMPLE}/g" > SJ_STAR_new_${SAMPLE}_${CHR}.sh
         bash SJ_STAR_new_${SAMPLE}_${CHR}.sh
 
-
         ##########################################################
         ## Creating SIMPLE_JUNC.sh from template and running it ##
         ##########################################################
-        
         cd ../scripts
         echo NOW DOING SIMPLE JUNC
 
@@ -107,9 +107,7 @@ do
         ###################################################
         ### Creating IR.sh from template and running it ###
         ###################################################
-
         cd ../scripts
-        # NOW DOINF IR
 
         sed "s/CHROME/${CHR}/g" /mnt/gtklab01/darren/CryEx_GSE227047/samples/misc_scripts/IR_new.sh | sed "s/GSM_SAM/${SAMPLE}/g" > IR_new_${SAMPLE}_${CHR}.sh
         bash IR_new_${SAMPLE}_${CHR}.sh
