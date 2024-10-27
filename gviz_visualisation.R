@@ -217,3 +217,47 @@ plotTracks(list(ht),
            from = start - 7000 ,
            to = end + 5000)
 
+
+# ----------------- Genes missed by CryEx but detected by SpliCeAT ----------------
+
+# OFD1 centriole and centriolar satellite protein chrX:13739236-13739314
+# ylim 0-1000, almost no difference, some hnRNPM binding sites but no Cryptic exon
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.1),
+           from = start - 3000 ,
+           to = end + 8000)
+
+
+# FBH1 F-box DNA helicase 1 chr10:5891019-5891116
+# FBH1 not picked up by CryEx, very minor differential splicing w low RNAseq levels
+# ylim 0-1000, there are no hnRNPM binding sites
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.0, 0.55, 0.55, 0.15, 0.15),
+           from = start - 1000 ,
+           to = end + 10000)
+
+
+# CRYL1 crystallin lambda 1 chr13:20426695-20427305
+# Region highlight was not flagged by CryEx, but flagged by Spliceat
+# was high confidence but overall no significant differential splicing 
+# ylim 0,100, there are no hnRNPM binding sites
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.0, 0.55, 0.55, 0.15, 0.15),
+           from = start - 2000 ,
+           to = end + 6000)
+
