@@ -261,3 +261,47 @@ plotTracks(list(ht),
            from = start - 2000 ,
            to = end + 6000)
 
+
+# ----------------- Cryptic exons found by CryEx but not SpliCeAT ----------------
+
+# IMPAD1	chr8:57880494-57880557	
+# NOTHING
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 10000 ,
+           to = end + 10000)
+
+
+# GPR149	chr3 154079069-154079129	154078385	154082516
+# NOTHING
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 10000 ,
+           to = end + 10000)
+
+
+
+# MRE11A	chr11:94194404-94194595	94194202	94194945
+# MRE11A	chr11:94195046-94195233	94194202	94197278
+# NOTHING except for some hnRNPM binding sites
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           #coverageHeight = 2,
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 2000 ,
+           to = end + 3000)
+
