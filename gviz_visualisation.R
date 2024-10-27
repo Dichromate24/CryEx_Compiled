@@ -217,6 +217,46 @@ plotTracks(list(ht),
            from = start - 7000 ,
            to = end + 5000)
 
+# ------------------- Genes found only in CryEx and Whippet --------------------
+
+# SLC15A1 solute carrier family 15 member 1, chr13 98704289-98704435
+# Very minor Cryptic exon events in the KO
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 20000 ,
+           to = end + 20000)
+
+# CAPN8 calpain 8 chr1 223541616-223541647 chr1:223541648-223541859
+# Retained introm
+
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 5000 ,
+           to = end + 15000)
+
+
+# LIPK lipase family member K chr10:88732178-88732287 
+# Cryptic Splicing events, and retained intron
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 3000 ,
+           to = end + 25000)
+
 
 # ----------------- Genes missed by CryEx but detected by SpliCeAT ----------------
 
