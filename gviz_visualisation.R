@@ -305,3 +305,51 @@ plotTracks(list(ht),
            from = start - 2000 ,
            to = end + 3000)
 
+
+# ----------------- Retain introns found by CryEx but not SpliCeAT ----------------
+
+
+# FKBP5	chr6 35610620-35640368
+# Retained intron but not significant
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 20000 ,
+           to = end + 20000)
+
+
+#TEX9	chr15 56726593-56735627 
+# insignificant
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.4, 0.4, 0.2, 0.15),
+           from = start - 25000 ,
+           to = end + 2000)
+
+
+# SELO	chr22:50649340-50654145
+# NOTHING
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           #coverageHeight = 2,
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 5000 ,
+           to = end + 5000)
+
+
+
+
+
+
