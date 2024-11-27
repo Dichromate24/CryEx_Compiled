@@ -140,7 +140,6 @@ cnetplot(union_go_down,showCategory=10,cex_label_gene=0.5)
 
 # Redo everything with the "subset" set, which used a subset of union set during the augment transcriptome process
 
-
 subset_collapse <- read_csv("/Users/darren/Desktop/SUBSET_collapsed_differential_transcript_analysis.csv")
 
 subset_collapse_filtered <- subset_collapse[(subset_collapse$qval_lrt <= 0.05),]
@@ -187,50 +186,6 @@ dotplot(union_go_down)
 cnetplot(union_go_down,showCategory=10,cex_label_gene=0.5)
 
 
-
-
-
-# Isolate genes that were found by CryEx but missed by SpliCeAT, and run GO analysis on them
-
-ensembl <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
-gene_symbols <- c("RP11-691N7.6", "MRE11A", "GPR149", "SPRN", "RP11-115D19.1", 
-                  "RP11-782C8.1", "IMPAD1", "SELO", "TMC1", "RP11-104E19.1", 
-                  "TEX9", "RP11-45M22.4", "RP11-278A23.2", "C5orf28", "TMEM206",
-                  "FKBP5", "FBXO18", "RP11-298J20.4", "RALB", "KCTD7", 
-                  "AC004791.2", "SMC5", "SLC2A9", "RP11-29G8.3", "FAM160A1", 
-                  "HES2", "SYNJ2BP", "DAB1", "ATP5S", "RP11-16D22.2", "PRUNE",
-                  "MELK", "ARHGEF35", "C9orf3", "RP11-597D13.9", "ADRBK2", 
-                  "FAM134B", "CTNNBL1", "HIST1H2AC", "LEMD1", "SQRDL", 
-                  "MBOAT2", "RP3-510D11.2", "GUCY1A3", "CTD-2012J19.3", 
-                  "RP11-400K9.4", "FAR2", "FLVCR2", "ACKR4", "MFI2", "SLC25A13",
-                  "RNU6ATAC38P", "SNORD116-23", "C2orf54", "RNU6-1318P", 
-                  "AL049539.1", "BTBD10", "RP11-463P17.3", "RP11-996F15.2", 
-                  "SPG20", "TMEM248", "RP11-20B24.6", "RP11-20B24.5", 
-                  "RP11-438D8.2", "AC137590.1", "RP11-519G16.3", "RP11-265F19.1",
-                  "RP11-574F21.2", "NFKBID", "ANKRD61", "PALM2-AKAP2", 
-                  "RP11-750H9.7", "RP11-203B9.4", "SNORD116-12", "MIR27B", 
-                  "MIR3074", "MIR23B", "GOLGA7B", "RPL30", "AC010127.3", 
-                  "FAM101A", "SNORD116-18", "TICRR", "CKAP4", "IGLV5-52", 
-                  "RNU6-1057P", "RP11-727A23.7", "RP1-197B17.3", "MIR4296", 
-                  "MIR4999", "MIR5690", "KIAA0391", "AC010642.1", "RP11-474I11.8",
-                  "RP11-474I11.7", "ADCK5", "WHSC1", "RP11-843P14.1", "AHSA2",
-                  "RP4-569M23.4", "RP4-569M23.2", "RP11-517H2.6", "FGFR1OP", 
-                  "RP11-944L7.4", "SNORD1B", "RP11-52A20.2", "RP11-565F19.2", 
-                  "MIR1205", "SP1", "AL031005.1", "BCAS4")
-
-gene_mapping <- getBM(attributes = c('ensembl_gene_id', 'external_gene_name'),
-                      filters = 'external_gene_name',
-                      values = gene_symbols,
-                      mart = ensembl)
-
-CryEx_only <- enrichGO(gene         = gene_mapping$ensembl_gene_id,
-                           OrgDb        = org.Hs.eg.db,
-                           keyType      = "ENSEMBL",
-                           ont          = "BP",  
-                           pAdjustMethod = "BH",
-                           pvalueCutoff = 0.05)
-
-View(as_tibble(CryEx_only))
 
 
 # Peform GO analysis on the gene set that was published by CryEx 
