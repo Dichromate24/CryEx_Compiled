@@ -79,8 +79,8 @@ end <- 100519608
 
 
 ht <- HighlightTrack(trackList = list(genome_axis, hnRNPM_track, wt_align_track_overlay, ko_align_track_overlay, gene_track, gene_track_cryptic),
-                     #start = 35610620,
-                     #end = 35640368,
+                     #start = start,
+                     #end = end,
                      chromosome = chromosome)
 
 
@@ -89,7 +89,6 @@ ht <- HighlightTrack(trackList = list(genome_axis, hnRNPM_track, wt_align_track_
 
 # ITGB1 integrin subunit beta 1, cryptc exon at chr10 32915810 - 32915842
 # ylim 0-25000
-
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -101,8 +100,7 @@ plotTracks(list(ht),
            to = end + 5000)
 
 # "TYW3 tRNA-yW synthesizing protein 3 homolog Retained intron at chr1 74744972 74746864
-# ylim 0-1700, there are no hnRNPM binding sites
-
+# ylim 0-1700
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -116,8 +114,7 @@ plotTracks(list(ht),
 
 # TRAPPC10 trafficking protein particle complex subunit 10 chr21 
 # retained intron at 44038176 44052279
-# ylim 0-1000, there are no hnRNPM binding sites
-
+# ylim 0-1000
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -134,8 +131,7 @@ plotTracks(list(ht),
 
 
 # CABIN1 calcineurin binding protein 1 Cryptic exon at chr22:24068467-24070799
-# ylim 0-1000, there are no hnRNPM binding sites
-
+# ylim 0-1000
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -148,7 +144,7 @@ plotTracks(list(ht),
 
 
 # MTMR3 myotubularin related protein 3, overall reduced expression, chr22 30003898-30004021
-# ylim 0-1000, there are no hnRNPM binding sites
+# ylim 0-1000
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -162,7 +158,7 @@ plotTracks(list(ht),
 
 # DCUN1D4 defective in cullin neddylation 1 domain containing 4 chr4:51908976-51908979
 # Lower expression
-# ylim 0-1000, there are no hnRNPM binding sites
+# ylim 0-1000
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -178,7 +174,7 @@ plotTracks(list(ht),
 # --------------- Replicating the plots published by the paper -----------------
 
 # ACYP1 acylphosphatase 1 chr14:75056447-75056560
-# ylim 0-1500, there are no hnRNPM binding sites
+# ylim 0-1500
 
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
@@ -192,7 +188,7 @@ plotTracks(list(ht),
 
 
 # TMEM45A transmembrane protein 45A, erroneous start site, chr3 100519533-100519608
-# ylim 0-1000 there are no hnRNPM binding sites
+# ylim 0-1000 
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -206,7 +202,7 @@ plotTracks(list(ht),
 
 
 # RBM34 RNA binding motif protein 34 chr1 235143711 235145015
-# ylim 0-1500, there are no hnRNPM binding sites
+# ylim 0-1500
 plotTracks(list(ht),
            transcriptAnnotation = "symbol",
            type = c("coverage", "sashimi"),
@@ -216,6 +212,53 @@ plotTracks(list(ht),
            sizes = c(0.1, 0.0, 0.5, 0.5, 0.2, 0.2),
            from = start - 7000 ,
            to = end + 5000)
+
+
+# ----------------- Genes missed by CryEx but detected by SpliCeAT ----------------
+
+# CRYL1 crystallin lambda 1 chr13:20426695-20427305
+# Region highlight was not flagged by CryEx, but flagged by Spliceat
+# was high confidence but overall no significant differential splicing 
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.0, 0.55, 0.55, 0.2, 0.2),
+           from = start - 25000 ,
+           to = end + 100000)
+
+# CRYL1 zoom in
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.0, 0.6, 0.6, 0.15, 0.15),
+           from = start - 3000 ,
+           to = end + 3000)
+
+# ----------------- Cryptic exons found by CryEx but not SpliCeAT ----------------
+
+# GPR149	chr3 154079069-154079129	154078385	154082516
+# latest GRCh38 154334943-154430190
+# previous GRCh 37 154,052,732-154,147,979
+
+plotTracks(list(ht),
+           transcriptAnnotation = "symbol",
+           type = c("coverage", "sashimi"),
+           #type = c("coverage"),
+           sashimiScore = 20,
+           sashimiNumbers=TRUE,
+           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
+           from = start - 5000 ,
+           to = end + 2000)
+
+
+
+
 
 # ------------------- Genes found only in CryEx and Whippet --------------------
 
@@ -257,133 +300,6 @@ plotTracks(list(ht),
            from = start - 3000 ,
            to = end + 25000)
 
-
-# ----------------- Genes missed by CryEx but detected by SpliCeAT ----------------
-
-# OFD1 centriole and centriolar satellite protein chrX:13739236-13739314
-# ylim 0-1000, almost no difference, some hnRNPM binding sites but no Cryptic exon
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.1),
-           from = start - 3000 ,
-           to = end + 8000)
-
-
-# FBH1 F-box DNA helicase 1 chr10:5891019-5891116
-# FBH1 not picked up by CryEx, very minor differential splicing w low RNAseq levels
-# ylim 0-1000, there are no hnRNPM binding sites
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.0, 0.55, 0.55, 0.15, 0.15),
-           from = start - 1000 ,
-           to = end + 10000)
-
-
-# CRYL1 crystallin lambda 1 chr13:20426695-20427305
-# Region highlight was not flagged by CryEx, but flagged by Spliceat
-# was high confidence but overall no significant differential splicing 
-# ylim 0,100, there are no hnRNPM binding sites
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.0, 0.55, 0.55, 0.15, 0.15),
-           from = start - 2000 ,
-           to = end + 6000)
-
-
-# ----------------- Cryptic exons found by CryEx but not SpliCeAT ----------------
-
-# IMPAD1	chr8:57880494-57880557	
-# NOTHING
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 10000 ,
-           to = end + 10000)
-
-
-# GPR149	chr3 154079069-154079129	154078385	154082516
-# NOTHING
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 10000 ,
-           to = end + 10000)
-
-
-
-# MRE11A	chr11:94194404-94194595	94194202	94194945
-# MRE11A	chr11:94195046-94195233	94194202	94197278
-# NOTHING except for some hnRNPM binding sites
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           #coverageHeight = 2,
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 2000 ,
-           to = end + 3000)
-
-
-# ----------------- Retain introns found by CryEx but not SpliCeAT ----------------
-
-
-# SELO	chr22:50649340-50654145
-# NOTHING
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 5000 ,
-           to = end + 5000)
-
-# SPG20 chr13 36909969-36920718
-# NOTHING
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 20000 ,
-           to = end + 20000)
-
-# MIR27B, MIR3074, MIR23B chr9 97843062-97848963
-# NOTHING
-plotTracks(list(ht),
-           transcriptAnnotation = "symbol",
-           type = c("coverage", "sashimi"),
-           #type = c("coverage"),
-           sashimiScore = 20,
-           sashimiNumbers=TRUE,
-           sizes = c(0.1, 0.1, 0.5, 0.5, 0.2, 0.15),
-           from = start - 20000 ,
-           to = end + 20000)
 
 
 
